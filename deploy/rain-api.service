@@ -1,0 +1,15 @@
+[Unit]
+Description=Rain MNIST API (rain-docs-backend)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/rain-docs-backend
+ExecStart=/home/ubuntu/.local/bin/rain server.rn
+Restart=on-failure
+RestartSec=3
+Environment=PATH=/home/ubuntu/.local/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=multi-user.target
