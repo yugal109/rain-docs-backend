@@ -1,0 +1,28 @@
+benutzen "http";
+benutzen "json";
+benutzen "str";
+benutzen "lib/model.rn";
+
+fun predictHandler(req) {
+    if (req.body == nil or str::len(req.body) == 0) {
+        return http::jsonResponse(400, "{\"error\": \"empty body\"}");
+    }
+
+    var data = json::parse(req.body);
+
+    if (data == nil) {
+        return http::jsonResponse(400, "{\"error\": \"invalid json body\"}");
+    }
+
+    if (data.pixels == nil) {
+        return http::jsonResponse(400, "{\"error\": \"pixels required\"}");
+    }
+
+    if (data.pixels->len() != 784) {
+        return http::jsonResponse(400, "{\"error\": \"pixels must have length 784\"}");
+    }
+
+    var digit = model::predict(data.pixels);
+
+    return http::jsonResponse(200, "{\"digit\": " + str::format("{0}", digit) + "}");
+}

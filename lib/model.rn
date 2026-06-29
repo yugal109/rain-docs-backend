@@ -1,0 +1,18 @@
+benutzen "math";
+
+print "loading weights...";
+var W1 = math::loadMatrix("weights/w1.bin");
+var b1 = math::loadMatrix("weights/b1.bin");
+var W2 = math::loadMatrix("weights/w2.bin");
+var b2 = math::loadMatrix("weights/b2.bin");
+print "weights loaded";
+
+fun predict(pixels) {
+    var X = math::mscale(math::fromArray(pixels), 1.0 / 255.0);
+    var Z1 = math::madd(math::matmul(W1, X), b1);
+    var A1 = math::relu(Z1);
+    var Z2 = math::madd(math::matmul(W2, A1), b2);
+    var A2 = math::msoftmax(Z2);
+    var pred = math::argmax(A2);
+    return pred#[0];
+}

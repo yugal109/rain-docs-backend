@@ -1,0 +1,12 @@
+benutzen "http";
+benutzen "str";
+benutzen "lib/config.rn";
+benutzen "middleware/logger.rn";
+benutzen "routes/register.rn";
+
+http::cors(true);
+http::use(logger::logger);
+register::registerRoutes();
+
+print str::format("server starting on port {0}", config::PORT);
+http::listen(config::PORT);

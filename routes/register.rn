@@ -1,0 +1,10 @@
+benutzen "http";
+benutzen "routes/home.rn";
+benutzen "routes/health.rn";
+benutzen "routes/predict.rn";
+
+fun registerRoutes() {
+    http::get("/", home::homeHandler);
+    http::get("/api/health", health::healthHandler);
+    http::post("/api/predict", predict::predictHandler);
+}

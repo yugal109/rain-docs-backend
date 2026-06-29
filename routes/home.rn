@@ -1,0 +1,5 @@
+benutzen "http";
+
+fun homeHandler(req) {
+    return http::response(200, "mnist predict api");
+}

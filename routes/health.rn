@@ -1,0 +1,5 @@
+benutzen "http";
+
+fun healthHandler(req) {
+    return http::jsonResponse(200, "{\"status\": \"ok\"}");
+}
