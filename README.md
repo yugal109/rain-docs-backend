@@ -115,8 +115,14 @@ Request body:
 Response:
 
 ```json
-{ "digit": 7 }
+{
+  "digit": 7,
+  "probabilities": [0.01, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01, 0.85, 0.02, 0.05]
+}
 ```
+
+- `digit`: predicted class (0–9), same as `argmax` of the softmax output
+- `probabilities`: length-10 array, index `i` = model confidence for digit `i` (0–1, sums to 1)
 
 ### `GET /api/health`
 

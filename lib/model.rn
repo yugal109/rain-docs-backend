@@ -14,5 +14,6 @@ fun predict(pixels) {
     var Z2 = math::madd(math::matmul(W2, A1), b2);
     var A2 = math::msoftmax(Z2);
     var pred = math::argmax(A2);
-    return pred#[0];
+    var probs = math::mtoArray(A2);
+    return #[pred#[0], probs];
 }

@@ -22,7 +22,9 @@ fun predictHandler(req) {
         return http::jsonResponse(400, "{\"error\": \"pixels must have length 784\"}");
     }
 
-    var digit = model::predict(data.pixels);
+    var result = model::predict(data.pixels);
+    var digit = result#[0];
+    var probs = result#[1];
 
-    return http::jsonResponse(200, "{\"digit\": " + str::format("{0}", digit) + "}");
+    return http::jsonResponse(200, "{\"digit\": " + str::format("{0}", digit) + ", \"probabilities\": " + json::stringify(probs) + "}");
 }
